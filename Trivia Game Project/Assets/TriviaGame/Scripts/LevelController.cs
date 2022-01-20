@@ -13,13 +13,13 @@ namespace TriviaGame.Scripts
         [SerializeField] protected ToggleGroup _toggleGroup;
 
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
             _answerResult.gameObject.SetActive(false);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             _closeButton.onClick.RemoveListener(OnCloseButtonClick);
         }
@@ -33,6 +33,10 @@ namespace TriviaGame.Scripts
         {
             _answerResult.sprite = isCorrect ? _correct : _incorrect;
         }
-        
+
+        protected virtual void GenerateQuestions()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
