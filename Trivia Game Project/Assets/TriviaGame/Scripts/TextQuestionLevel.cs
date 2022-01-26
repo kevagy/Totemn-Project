@@ -1,28 +1,26 @@
 using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace TriviaGame.Scripts
 {
-    public class ImageQuestionLevel : LevelController
+    public class TextQuestionLevel : LevelController
     {
-        [SerializeField] private Image _questionImage;
-        [SerializeField] private QuestionTemplate<Sprite, string>[] _question;
+        [SerializeField] private TMPro.TMP_Text _questionText;
+        [SerializeField] private QuestionTemplate<string, string>[] _question;
 
-        private List<KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>> _generatedQuestion = new List<KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>>();
+        private List<KeyValuePair<QuestionTemplate<string, string>, List<string>>> _generatedQuestion = new List<KeyValuePair<QuestionTemplate<string, string>, List<string>>>();
 
-        private KeyValuePair<QuestionTemplate<Sprite, string>, List<string>> _currentQuestion;
+        private KeyValuePair<QuestionTemplate<string, string>, List<string>> _currentQuestion;
 
         protected override void OnEnable()
         {
             base.OnEnable();
             _answerOptions = new List<AnswerOption>();
-            _generatedQuestion = GenerateQuestions<Sprite, string>(_question);
+            _generatedQuestion = GenerateQuestions<string, string>(_question);
             ShowQuestion(_currentQuestionIndex);
         }
-
+        
         private async void ShowQuestion(int questionIndex)
         {
             if (questionIndex >= _generatedQuestion.Count)
@@ -32,7 +30,7 @@ namespace TriviaGame.Scripts
             }
             _currentQuestionIndex = questionIndex;
             _currentQuestion = _generatedQuestion[questionIndex];
-            _questionImage.sprite = _currentQuestion.Key.Question;
+            _questionText.text = _currentQuestion.Key.Question;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
@@ -41,9 +39,7 @@ namespace TriviaGame.Scripts
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
-
-
-
+        
         private async void CheckResult(int answerIndex)
         {
             var answer = _currentQuestion.Value[answerIndex];
@@ -52,6 +48,5 @@ namespace TriviaGame.Scripts
             HideResult();
             ShowQuestion(++_currentQuestionIndex);
         }
-
     }
 }
