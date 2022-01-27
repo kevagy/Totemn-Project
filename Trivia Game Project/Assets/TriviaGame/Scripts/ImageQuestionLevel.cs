@@ -27,7 +27,7 @@ namespace TriviaGame.Scripts
         {
             if (questionIndex >= _generatedQuestion.Count)
             {
-                //todo finish questions
+                FinishQuestion();
                 return;
             }
             _currentQuestionIndex = questionIndex;

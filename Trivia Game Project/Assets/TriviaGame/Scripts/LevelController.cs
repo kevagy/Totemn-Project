@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,19 +17,30 @@ namespace TriviaGame.Scripts
         [SerializeField] protected ToggleGroup _toggleGroup;
         [SerializeField] protected int _numberOfQuestionToShow = 12;
         [SerializeField] protected int _nubmerOfAnswers = 4;
+
         [Tooltip("Need to be in ms")]
         [SerializeField] protected int _timeToShowResult = 500;
 
+        [SerializeField] private TMPro.TMP_Text _timerText;
+
+        [Tooltip("Time to end in seconds")]
+        [SerializeField] private int _timeToEnd = 60;
+
+        [SerializeField] private MainMenu _mainMenu;
+
         protected List<AnswerOption> _answerOptions;
         protected int _currentQuestionIndex = 0;
+        protected int _score;
 
+        private bool _isTimerRunning;
         protected virtual void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
             _answerResult.gameObject.SetActive(false);
+             StartTimer();
         }
-        
-        protected List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>>  GenerateQuestions<Q,A>(QuestionTemplate<Q, A>[] question)
+
+        protected List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
         {
             var random = new System.Random();
             var randomList = question.OrderBy(item => random.Next()).ToList();
@@ -51,7 +63,7 @@ namespace TriviaGame.Scripts
             }
             return generatedQuestion;
         }
-        
+
         protected async Task CreateAnswerOptions()
         {
             if (_nubmerOfAnswers == _answerOptions.Count)
@@ -66,7 +78,7 @@ namespace TriviaGame.Scripts
                 await Task.Yield();
             }
         }
-        
+
 
         protected virtual void OnDisable()
         {
@@ -75,7 +87,7 @@ namespace TriviaGame.Scripts
 
         private void OnCloseButtonClick()
         {
-            //todo implement close function
+            _mainMenu.Show();
         }
 
         protected void ShowResult(bool isCorrect)
@@ -87,12 +99,26 @@ namespace TriviaGame.Scripts
         {
             _answerResult.gameObject.SetActive(false);
         }
-            
 
-        /*
-        protected virtual void GenerateQuestions()
+        private async Task StartTimer()
         {
-            throw new System.NotImplementedException();
-        }*/
+            int timer = _timeToEnd;
+            _isTimerRunning = true;
+            while (timer > 0 && _isTimerRunning)
+            {
+                await Task.Delay(1000);
+                timer -= 1;
+                TimeSpan dateTime = new TimeSpan(0, 0, timer);
+                _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
+            }
+
+            FinishQuestion();
+        }
+
+        protected void FinishQuestion()
+        {
+            _isTimerRunning = false;
+            _mainMenu.ShowScore(_score);
+        }
     }
 }
