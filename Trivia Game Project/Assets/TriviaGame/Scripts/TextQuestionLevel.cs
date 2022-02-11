@@ -20,7 +20,7 @@ namespace TriviaGame.Scripts
             _generatedQuestion = GenerateQuestions<string, string>(_question);
             ShowQuestion(_currentQuestionIndex);
         }
-        
+
         private async void ShowQuestion(int questionIndex)
         {
             if (questionIndex >= _generatedQuestion.Count)
@@ -39,11 +39,13 @@ namespace TriviaGame.Scripts
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
-        
+
         private async void CheckResult(int answerIndex)
         {
             var answer = _currentQuestion.Value[answerIndex];
-            ShowResult(answer.Equals(_currentQuestion.Key.Answer));
+            bool isCorrect = answer.Equals(_currentQuestion.Key.Answer);
+            ShowResult(isCorrect);
+            AddScore((isCorrect ? 1 : -1) * _currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
             HideResult();
             ShowQuestion(++_currentQuestionIndex);

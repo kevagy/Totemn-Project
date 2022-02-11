@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine.UI;
 
@@ -18,8 +17,11 @@ namespace TriviaGame.Scripts
         protected override void OnEnable()
         {
             base.OnEnable();
-            _answerOptions = new List<AnswerOption>();
+            Debug.Log($"1 answerToggles {_answerOptions.Count}");
             _generatedQuestion = GenerateQuestions<Sprite, string>(_question);
+            Debug.Log($"2 answerToggles {_answerOptions.Count}");
+            _currentQuestionIndex = 0;
+            Debug.Log($"3 answerToggles {_answerOptions.Count}");
             ShowQuestion(_currentQuestionIndex);
         }
 

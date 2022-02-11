@@ -10,7 +10,7 @@ public class ScorePanel : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private MainMenu _mainMenu;
 
-    public void SetScore(int score)
+    public void SetScore(float score)
     {
         _scoreText.SetText(score.ToString());
     }

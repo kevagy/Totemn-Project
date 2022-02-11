@@ -27,24 +27,28 @@ namespace TriviaGame.Scripts
         [SerializeField] private int _timeToEnd = 60;
 
         [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private TMPro.TMP_Text _scoreText;
 
-        protected List<AnswerOption> _answerOptions;
+        protected List<AnswerOption> _answerOptions = new List<AnswerOption>();
         protected int _currentQuestionIndex = 0;
-        protected int _score;
+        protected float _score;
 
         private bool _isTimerRunning;
         protected virtual void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
             _answerResult.gameObject.SetActive(false);
-             StartTimer();
+            StartTimer();
         }
 
         protected List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
         {
+            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             var random = new System.Random();
             var randomList = question.OrderBy(item => random.Next()).ToList();
+            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             var generatedQuestion = new List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>>();
+            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             for (int i = 0; i < _numberOfQuestionToShow; i++)
             {
                 List<A> answers = new List<A>();
@@ -61,6 +65,7 @@ namespace TriviaGame.Scripts
                 answers = answers.OrderBy(item => random.Next()).ToList();
                 generatedQuestion.Add(new KeyValuePair<QuestionTemplate<Q, A>, List<A>>(randomList[i], answers));
             }
+            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             return generatedQuestion;
         }
 
@@ -111,14 +116,21 @@ namespace TriviaGame.Scripts
                 TimeSpan dateTime = new TimeSpan(0, 0, timer);
                 _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
             }
-
+            _isTimerRunning = false;
             FinishQuestion();
+        }
+
+        protected void AddScore(float score)
+        {
+            _score = Mathf.Clamp(_score + score, 0, float.MaxValue);
+            _scoreText.text = _score.ToString();
         }
 
         protected void FinishQuestion()
         {
-            _isTimerRunning = false;
+            Debug.Log($"FinishQuestion");
             _mainMenu.ShowScore(_score);
         }
+
     }
 }

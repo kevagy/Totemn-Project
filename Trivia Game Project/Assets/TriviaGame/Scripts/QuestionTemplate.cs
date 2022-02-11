@@ -8,5 +8,6 @@ namespace TriviaGame.Scripts
         public A Answer;
         public bool IsCorrect;
         public bool IsAnswerOption;
+        public float ScorePerQ = 10f;
     }
 }

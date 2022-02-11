@@ -22,17 +22,19 @@ public class MainMenu : MonoBehaviour
 
    private void OnPlayButtonClick()
    {
-      _imageQuestion.gameObject.SetActive(true);
+      _openedLevel = _imageQuestion;
+      _openedLevel.gameObject.SetActive(true);
       _playButton.gameObject.SetActive(false);
    }
 
    public void Show()
    {
       gameObject.SetActive(true);
+      _playButton.gameObject.SetActive(true);
       _openedLevel.gameObject.SetActive(false);
    }
 
-   public void ShowScore(int score)
+   public void ShowScore(float score)
    {
       _scorePanel.SetScore(score);
       _scorePanel.gameObject.SetActive(true);
