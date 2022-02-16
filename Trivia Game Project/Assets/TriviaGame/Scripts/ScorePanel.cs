@@ -14,7 +14,7 @@ public class ScorePanel : MonoBehaviour
     {
         _scoreText.SetText(score.ToString());
     }
-    
+
     private void OnEnable()
     {
         _closeButton.onClick.AddListener(OnCloseButtonClick);

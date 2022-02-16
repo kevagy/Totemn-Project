@@ -1,7 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,17 +38,14 @@ namespace TriviaGame.Scripts
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
             _answerResult.gameObject.SetActive(false);
-            StartTimer();
+            StartTimer().Forget();
         }
 
         protected List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
         {
-            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             var random = new System.Random();
             var randomList = question.OrderBy(item => random.Next()).ToList();
-            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             var generatedQuestion = new List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>>();
-            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             for (int i = 0; i < _numberOfQuestionToShow; i++)
             {
                 List<A> answers = new List<A>();
@@ -65,11 +62,10 @@ namespace TriviaGame.Scripts
                 answers = answers.OrderBy(item => random.Next()).ToList();
                 generatedQuestion.Add(new KeyValuePair<QuestionTemplate<Q, A>, List<A>>(randomList[i], answers));
             }
-            Debug.Log($"GenerateQuestions answerToggles {_answerOptions.Count}");
             return generatedQuestion;
         }
 
-        protected async Task CreateAnswerOptions()
+        protected async UniTask CreateAnswerOptions()
         {
             if (_nubmerOfAnswers == _answerOptions.Count)
             {
@@ -80,7 +76,7 @@ namespace TriviaGame.Scripts
             {
                 AnswerOption answerOption = Instantiate(_answerOptionPrefab, _toggleGroup.transform);
                 _answerOptions.Add(answerOption);
-                await Task.Yield();
+                await UniTask.Yield();
             }
         }
 
@@ -105,17 +101,18 @@ namespace TriviaGame.Scripts
             _answerResult.gameObject.SetActive(false);
         }
 
-        private async Task StartTimer()
+        private async UniTask StartTimer()
         {
             int timer = _timeToEnd;
             _isTimerRunning = true;
             while (timer > 0 && _isTimerRunning)
             {
-                await Task.Delay(1000);
+                await UniTask.Delay(1000);
                 timer -= 1;
                 TimeSpan dateTime = new TimeSpan(0, 0, timer);
                 _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
             }
+
             _isTimerRunning = false;
             FinishQuestion();
         }
@@ -128,9 +125,8 @@ namespace TriviaGame.Scripts
 
         protected void FinishQuestion()
         {
-            Debug.Log($"FinishQuestion");
+            _isTimerRunning = false;
             _mainMenu.ShowScore(_score);
         }
-
     }
 }

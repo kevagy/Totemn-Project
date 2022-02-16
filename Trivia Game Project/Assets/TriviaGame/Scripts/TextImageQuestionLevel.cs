@@ -41,7 +41,8 @@ namespace TriviaGame.Scripts
             _currentQuestionIndex = questionIndex;
             _currentQuestion = _generatedQuestion[questionIndex];
             _questionText.text = _currentQuestion.Key.Question.TextValue;
-            //todo setup image for question
+            _questionImage.sprite = _currentQuestion.Key.Question.ImageValue;
+
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
@@ -54,7 +55,9 @@ namespace TriviaGame.Scripts
         private async void CheckResult(int answerIndex)
         {
             var answer = _currentQuestion.Value[answerIndex];
-            ShowResult(answer.Equals(_currentQuestion.Key.Answer));
+            bool isCorrect = answer.Equals(_currentQuestion.Key.Answer);
+            ShowResult(isCorrect);
+            AddScore(isCorrect?10:-1*_currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
             HideResult();
             ShowQuestion(++_currentQuestionIndex);
