@@ -7,6 +7,16 @@ using UnityEngine.UI;
 
 namespace TriviaGame.Scripts
 {
+    public enum QuestionType
+    {
+        Text,
+        Image,
+        TextImage,
+        TrueFalse
+
+     }
+
+
     public class LevelController : MonoBehaviour
     {
         [SerializeField] private Button _closeButton;

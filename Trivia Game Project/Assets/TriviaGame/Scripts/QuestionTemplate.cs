@@ -6,8 +6,27 @@ namespace TriviaGame.Scripts
     {
         public Q Question;
         public A Answer;
-        public bool IsCorrect;
         public bool IsAnswerOption;
         public float ScorePerQ = 10f;
+
     }
+
+    [Serializable]
+    public enum SequenceQuestion
+    {
+        Text,
+        Image,
+        TextImage,
+        TrueFalse
+
+    }
+
+
+    [Serializable]
+    public class QuestionData <Q, A>
+    {
+        public SequenceQuestion Type;
+        public QuestionTemplate<Q, A>[] Questions;
+    }
+
 }
