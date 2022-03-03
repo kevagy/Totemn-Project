@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e84d61d73c4ee4db1892ffcd2f0878, type: 3}
+  m_Name: New Questions Order
+  m_EditorClassIdentifier: 
+  _textQuestion:
+    Type: 0
+    Questions:
+    - Question: Capital of Canada
+      Answer: Ottawa
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Turkey
+      Answer: Istanbul
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of France
+      Answer: Paris
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Ukraine
+      Answer: Kyiv
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of South Korea
+      Answer: Seoul
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Australia
+      Answer: Sydney
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Mexico
+      Answer: Mexico City
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Germany
+      Answer: Berlin
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of Ghana
+      Answer: Accra
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Capital of United States
+      Answer: Washington
+      IsAnswerOption: 0
+      ScorePerQ: 10
+  _imageQuestion:
+    Type: 1
+    Questions:
+    - Question: {fileID: 21300000, guid: b1586f2d580321543835a645b679d820, type: 3}
+      Answer: Angola
+      IsAnswerOption: 0
+      ScorePerQ: 0
+    - Question: {fileID: 21300000, guid: c93d9b6081679264ab274e18cbdd1a3d, type: 3}
+      Answer: Cuba
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: d28755b239813fe40bf7e2a806bd21b9, type: 3}
+      Answer: England
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 7bd8879eb69e7754fb90e4d897e4bbe2, type: 3}
+      Answer: China
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 969d209dbcb9e154bbe3dec4111aec2b, type: 3}
+      Answer: Mexico
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: a54c60c764ae77940bfd95e9ee22a794, type: 3}
+      Answer: Portugal
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 5da2731620cb3ab44aa7eb0d6b637254, type: 3}
+      Answer: Ghana
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 4a58296fc41098e43b28c611746deb02, type: 3}
+      Answer: Nigeria
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 01f3e4cbfd9bd41499fd3561b5c19f98, type: 3}
+      Answer: Poland
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 7525fb3ba804cdc408a0b954fb31bef6, type: 3}
+      Answer: Syria
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: d94b7827aa0eb6842ad670c51e285d2e, type: 3}
+      Answer: Thailand
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: {fileID: 21300000, guid: 8b284e23e38689c4d9e312ce7111985c, type: 3}
+      Answer: Turkey
+      IsAnswerOption: 0
+      ScorePerQ: 10
+  _textImageQuestion:
+    Type: 2
+    Questions:
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 42fc9ca7519be034fb6b86e5b6129bf3, type: 3}
+      Answer: Australia
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 3fceb1200644e944bac0accabc4e0dfd, type: 3}
+      Answer: Brazil
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: bda12306f80c3754895f376202a82743, type: 3}
+      Answer: China
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: bbc4e14996f01c349b8a438b0436fdf1, type: 3}
+      Answer: Egypt
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 620e0046e910a824ca9bc9ad28f436e8, type: 3}
+      Answer: India
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 22ecf234be73ee74fb81d6e190edd6a7, type: 3}
+      Answer: Mexico
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 050b8748b5dd1074790956cc77a93598, type: 3}
+      Answer: Nigeria
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: dbf586379b0815c4fb2584bdd209a056, type: 3}
+      Answer: Saudi Arabia
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: e694b6b8efbf5cd47a48b5f53879cb86, type: 3}
+      Answer: Bahamas
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question:
+        TextValue: Whic country is this?
+        ImageValue: {fileID: 21300000, guid: 89f7eabd845f910419a1c5f82022c5d9, type: 3}
+      Answer: United States
+      IsAnswerOption: 0
+      ScorePerQ: 10
+  _trueFalseQuestion:
+    Type: 3
+    Questions:
+    - Question: Ukraine is in North America
+      Answer: 0
+      IsAnswerOption: 0
+      ScorePerQ: 0
+    - Question: Brazil is in South America
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Ghana is South of the Equator
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: China is the largest country by area
+      Answer: 0
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: England is part of the UK
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Australia is an Island
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Egypt is in Africa
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: Austria has Kangaroos
+      Answer: 0
+      IsAnswerOption: 0
+      ScorePerQ: 10
+    - Question: India is in Asia
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 0
+    - Question: Russia border Mongolia and China
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 0
+    - Question: Turkey is in Asia
+      Answer: 1
+      IsAnswerOption: 0
+      ScorePerQ: 0

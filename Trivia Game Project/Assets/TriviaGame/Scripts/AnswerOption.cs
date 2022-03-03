@@ -23,7 +23,7 @@ public class AnswerOption : MonoBehaviour
         _index = index;
         _onChoosedAnswer = onChoosedAnswer;
     }
-    
+
     public void SetToggleGroup(ToggleGroup toggleGroup)
     {
         _toggle.group = toggleGroup;

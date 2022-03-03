@@ -45,7 +45,7 @@ namespace TriviaGame.Scripts
             var answer = _currentQuestion.Value[answerIndex];
             bool isCorrect = answer.Equals(_currentQuestion.Key.Answer);
             ShowResult(isCorrect);
-            AddScore((isCorrect ? 1 : -1) * _currentQuestion.Key.ScorePerQ);
+            AddScore(isCorrect ? 10 : -1 * _currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
             HideResult();
             ShowQuestion(++_currentQuestionIndex);
