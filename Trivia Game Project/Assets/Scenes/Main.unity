@@ -190,7 +190,7 @@ MonoBehaviour:
   _timeToShowResult: 500
   _timerText: {fileID: 893021263}
   _timeToEnd: 60
-  _mainMenu: {fileID: 871786413}
+  _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1947958884}
   _questionImage: {fileID: 1187710709}
   _question:
@@ -687,7 +687,7 @@ MonoBehaviour:
   _timeToShowResult: 500
   _timerText: {fileID: 893021263}
   _timeToEnd: 60
-  _mainMenu: {fileID: 871786413}
+  _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1947958884}
   _questionText: {fileID: 1704590604}
   _question:
@@ -1722,7 +1722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1214298883}
   _closeButton: {fileID: 1112979614}
-  _mainMenu: {fileID: 871786413}
+  _mainMenu: {fileID: 0}
 --- !u!1001 &651380766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1942,7 +1942,7 @@ MonoBehaviour:
   _timeToShowResult: 500
   _timerText: {fileID: 679813169}
   _timeToEnd: 60
-  _mainMenu: {fileID: 871786413}
+  _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1214298883}
   _questionText: {fileID: 940013379}
   _questionImage: {fileID: 1594692226}
@@ -2284,6 +2284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 720965050}
+  - component: {fileID: 720965051}
   m_Layer: 5
   m_Name: TrueFalseQuestion
   m_TagString: Untagged
@@ -2313,11 +2314,36 @@ RectTransform:
   m_Father: {fileID: 871786410}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &720965051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720965049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a514e134c1b994895a6f3ac3d246b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _closeButton: {fileID: 0}
+  _answerOptionPrefab: {fileID: 0}
+  _answerResult: {fileID: 0}
+  _correct: {fileID: 0}
+  _incorrect: {fileID: 0}
+  _toggleGroup: {fileID: 0}
+  _numberOfQuestionToShow: 12
+  _nubmerOfAnswers: 4
+  _timeToShowResult: 500
+  _timerText: {fileID: 0}
+  _timeToEnd: 60
+  _mainMenu: {fileID: 0}
+  _scoreText: {fileID: 0}
 --- !u!1 &764219621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,12 +2794,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 871786409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f744f5c1b00710f4996a442888b26383, type: 3}
+  m_Script: {fileID: 11500000, guid: 063f1237cd94ca24face2595a769de15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playButton: {fileID: 369137875}
-  _imageQuestion: {fileID: 676242741}
-  _scorePanel: {fileID: 611206851}
+  _questionsOrder: {fileID: 11400000, guid: 4f322ade76ed75642b262fea113f7853, type: 2}
+  _textQuestionLevel: {fileID: 153225476}
+  _imageQuestionLevel: {fileID: 26512130}
+  _textImageQuestionLevel: {fileID: 676242741}
+  _trueFalseQuestionLevel: {fileID: 720965051}
 --- !u!1 &893021261
 GameObject:
   m_ObjectHideFlags: 0
@@ -5253,6 +5281,7 @@ GameObject:
   - component: {fileID: 1691986322}
   - component: {fileID: 1691986321}
   - component: {fileID: 1691986320}
+  - component: {fileID: 1691986323}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -5341,6 +5370,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1691986323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691986318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f744f5c1b00710f4996a442888b26383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playButton: {fileID: 369137875}
+  _imageQuestion: {fileID: 676242741}
+  _scorePanel: {fileID: 611206851}
 --- !u!1 &1704590602
 GameObject:
   m_ObjectHideFlags: 0
@@ -6086,8 +6130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063f1237cd94ca24face2595a769de15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questions: {fileID: 0}
-  _questionText: {fileID: 1184943890}
+  _questionsOrder: {fileID: 0}
+  _textQuestionLevel: {fileID: 0}
+  _imageQuestionLevel: {fileID: 0}
+  _textImageQuestionLevel: {fileID: 0}
+  _trueFalseQuestionLevel: {fileID: 0}
 --- !u!1 &1999450793
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,6 @@ namespace TriviaGame.Scripts
         Image,
         TextImage,
         TrueFalse
-
     }
 
 
