@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace TriviaGame.Scripts
 {
     [Serializable]
@@ -8,7 +11,6 @@ namespace TriviaGame.Scripts
         public A Answer;
         public bool IsAnswerOption;
         public float ScorePerQ = 10f;
-
     }
 
     [Serializable]
@@ -17,7 +19,8 @@ namespace TriviaGame.Scripts
         Text,
         Image,
         TextImage,
-        TrueFalse
+        TrueFalse,
+        PresetAnswers
     }
 
 
@@ -26,6 +29,7 @@ namespace TriviaGame.Scripts
     {
         public SequenceQuestion Type;
         public QuestionTemplate<Q, A>[] Questions;
+        public List<Sprite> _answers;
     }
 
 }

@@ -55,6 +55,7 @@ MonoBehaviour:
       Answer: Washington
       IsAnswerOption: 0
       ScorePerQ: 10
+    _answers: []
   _imageQuestion:
     Type: 1
     Questions:
@@ -106,6 +107,7 @@ MonoBehaviour:
       Answer: Turkey
       IsAnswerOption: 0
       ScorePerQ: 10
+    _answers: []
   _textImageQuestion:
     Type: 2
     Questions:
@@ -169,6 +171,7 @@ MonoBehaviour:
       Answer: United States
       IsAnswerOption: 0
       ScorePerQ: 10
+    _answers: []
   _trueFalseQuestion:
     Type: 3
     Questions:
@@ -216,3 +219,20 @@ MonoBehaviour:
       Answer: 1
       IsAnswerOption: 0
       ScorePerQ: 0
+    _answers: []
+  _populationQuestion:
+    Type: 0
+    Questions: []
+    _answers: []
+  _populationLowQuestion:
+    Type: 4
+    Questions:
+    - Question: Moscow
+      Answer: 0
+      IsAnswerOption: 0
+      ScorePerQ: 0
+    _answers:
+    - {fileID: 21300000, guid: acda275f706e7ed4c969af8e13e06f2b, type: 3}
+    - {fileID: 21300000, guid: 9f04b204615983f46b35f45b920145ba, type: 3}
+    - {fileID: 21300000, guid: deadef18d70c25849b1611b3da09f8be, type: 3}
+    - {fileID: 21300000, guid: 363ed1fa250287445aad0e39c5253f31, type: 3}
