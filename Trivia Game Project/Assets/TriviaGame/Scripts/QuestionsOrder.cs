@@ -16,6 +16,6 @@ public class QuestionsOrder : ScriptableObject
     public QuestionData<Sprite, string> ImageQuestion => _imageQuestion;
     public QuestionData<CombineTextImage, string> TextImageQuestion => _textImageQuestion;
     public QuestionData<string, bool> TrueFalseQuestion => _trueFalseQuestion;
-    public QuestionData<string, int> PopulationLowQuestion;
-    public QuestionData<string, int> PopulationMidQuestion;
+    public QuestionData<string, int> PopulationLowQuestion => _populationLowQuestion;
+    public QuestionData<string, int> PopulationMidQuestion => _populationMidQuestion;
 }
