@@ -9,8 +9,7 @@ namespace TriviaGame.Scripts
         [SerializeField] private TMPro.TMP_Text _questionText;
         [SerializeField] private QuestionTemplate<string, string>[] _question;
 
-        private List<KeyValuePair<QuestionTemplate<string, string>, List<string>>> _generatedQuestion = new List<KeyValuePair<QuestionTemplate<string, string>, List<string>>>();
-
+        private List<KeyValuePair<QuestionTemplate<string, string>, List<string>>> _generatedQuestion;
         private KeyValuePair<QuestionTemplate<string, string>, List<string>> _currentQuestion;
 
         protected override void OnEnable()

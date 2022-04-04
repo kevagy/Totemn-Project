@@ -1061,6 +1061,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!114 &101486279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6714,6 +6715,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 26512130}
   _textImageQuestionLevel: {fileID: 676242741}
   _trueFalseQuestionLevel: {fileID: 720965051}
+  _questionInLevel: 10
 --- !u!1 &872858072
 GameObject:
   m_ObjectHideFlags: 0
@@ -10943,6 +10945,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!114 &1324494814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12408,15 +12411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e45c81fdcec48341a5efadb56373d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questions: {fileID: 0}
-  correctSprite: {fileID: 1293580057}
-  incorrectSprite: {fileID: 1044125257}
-  scores: {fileID: 764219625}
-  trueButton: {fileID: 2110751962}
-  falseButton: {fileID: 113948675}
-  onNextQuestion:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1482328961
 GameObject:
   m_ObjectHideFlags: 0
@@ -12951,6 +12945,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!114 &1572391914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13639,6 +13634,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!114 &1655862029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15306,6 +15302,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!114 &1884776963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16807,6 +16804,7 @@ MonoBehaviour:
   _imageQuestionLevel: {fileID: 0}
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
+  _questionInLevel: 10
 --- !u!1 &1999450793
 GameObject:
   m_ObjectHideFlags: 0

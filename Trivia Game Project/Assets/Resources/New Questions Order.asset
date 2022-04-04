@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Questions Order
   m_EditorClassIdentifier: 
   _textQuestion:
-    Type: 0
+    _type: 0
     Questions:
     - Question: Capital of Canada
       Answer: Ottawa
@@ -55,9 +55,9 @@ MonoBehaviour:
       Answer: Washington
       IsAnswerOption: 0
       ScorePerQ: 10
-    _answers: []
+    Answers: []
   _imageQuestion:
-    Type: 1
+    _type: 1
     Questions:
     - Question: {fileID: 21300000, guid: b1586f2d580321543835a645b679d820, type: 3}
       Answer: Angola
@@ -107,9 +107,9 @@ MonoBehaviour:
       Answer: Turkey
       IsAnswerOption: 0
       ScorePerQ: 10
-    _answers: []
+    Answers: []
   _textImageQuestion:
-    Type: 2
+    _type: 2
     Questions:
     - Question:
         TextValue: Whic country is this?
@@ -171,9 +171,9 @@ MonoBehaviour:
       Answer: United States
       IsAnswerOption: 0
       ScorePerQ: 10
-    _answers: []
+    Answers: []
   _trueFalseQuestion:
-    Type: 3
+    _type: 3
     Questions:
     - Question: Ukraine is in North America
       Answer: 0
@@ -219,68 +219,28 @@ MonoBehaviour:
       Answer: 1
       IsAnswerOption: 0
       ScorePerQ: 0
-    _answers: []
+    Answers: []
   _bordersQuestion:
-    Type: 4
+    _type: 4
     Questions: []
-    _answers:
-    - {fileID: 21300000, guid: ddc18b71beec82a479d584807d020428, type: 3}
-    - {fileID: 21300000, guid: d30bce56f3b0bb64b8afdaf1b1b6f71e, type: 3}
-    - {fileID: 21300000, guid: fa9ad3c1867b361448ab2be91cad67de, type: 3}
-    - {fileID: 21300000, guid: 88f3af486975d134a9db160500ca6c43, type: 3}
+    Answers: []
   _urbanPopulationQuestion:
-    Type: 4
+    _type: 4
     Questions: []
-    _answers:
-    - {fileID: 21300000, guid: 22de792228db0f340a5f8916443719f7, type: 3}
-    - {fileID: 21300000, guid: 3987e44d9addff34995b463779c3797f, type: 3}
-    - {fileID: 21300000, guid: ad095c5a9669d1c4781fdc8f5f7927fe, type: 3}
-    - {fileID: 21300000, guid: 938c2bdf8752993428cc4ef24c35c4d7, type: 3}
+    Answers: []
   _populationLowQuestion:
-    Type: 4
+    _type: 4
     Questions:
     - Question: Moscow
       Answer: 0
       IsAnswerOption: 0
       ScorePerQ: 0
-    _answers:
-    - {fileID: 21300000, guid: acda275f706e7ed4c969af8e13e06f2b, type: 3}
-    - {fileID: 21300000, guid: 9f04b204615983f46b35f45b920145ba, type: 3}
-    - {fileID: 21300000, guid: deadef18d70c25849b1611b3da09f8be, type: 3}
-    - {fileID: 21300000, guid: 363ed1fa250287445aad0e39c5253f31, type: 3}
+    Answers: []
   _populationMidQuestion:
-    Type: 4
+    _type: 4
     Questions: []
-    _answers:
-    - {fileID: 21300000, guid: 5c650f1927b13144787a3a3ea80dc385, type: 3}
-    - {fileID: 21300000, guid: 12837e72c585c3d40a1e46c9ed708b06, type: 3}
-    - {fileID: 21300000, guid: ce4c2540fe7452143a95da0ad73b0e08, type: 3}
-    - {fileID: 21300000, guid: fdf1c8694d15e41418cf8c8806605802, type: 3}
+    Answers: []
   _populationHighQuestion:
-    Type: 4
+    _type: 4
     Questions: []
-    _answers:
-    - {fileID: 21300000, guid: 495d71948ea223b468451d3dd3c8abeb, type: 3}
-    - {fileID: 21300000, guid: 635f1f66bd311dc4096380601eb38048, type: 3}
-    - {fileID: 21300000, guid: b0baaf0252f5dca4ab47acca44cc881e, type: 3}
-    - {fileID: 21300000, guid: fbde9fdaa96550e4bbfc0ffee6ee4883, type: 3}
-  BordersQuestion:
-    Type: 0
-    Questions: []
-    _answers: []
-  UrbanPopulationQuestion:
-    Type: 0
-    Questions: []
-    _answers: []
-  PopulationLowQuestion:
-    Type: 0
-    Questions: []
-    _answers: []
-  PopulationMidQuestion:
-    Type: 0
-    Questions: []
-    _answers: []
-  PopulationHighQuestion:
-    Type: 0
-    Questions: []
-    _answers: []
+    Answers: []
