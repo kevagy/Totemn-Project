@@ -9,20 +9,45 @@ namespace TriviaGame.Scripts
     {
         [SerializeField] private Image _questionImage;
         [SerializeField] private QuestionTemplate<Sprite, string>[] _question;
-
-        private List<KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>> _generatedQuestion = new List<KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>>();
+        private System.Action _onAnswered;
+        public QuestionTemplate<Sprite, string>[] Question
+        {
+            set { _question = value; }
+            get { return _question; }
+        }
+        private Dictionary<QuestionTemplate<Sprite, string>, List<string>> _generatedQuestion = new Dictionary<QuestionTemplate<Sprite, string>, List<string>>();
 
         private KeyValuePair<QuestionTemplate<Sprite, string>, List<string>> _currentQuestion;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            Debug.Log($"1 answerToggles {_answerOptions.Count}");
             _generatedQuestion = GenerateQuestions<Sprite, string>(_question);
-            Debug.Log($"2 answerToggles {_answerOptions.Count}");
             _currentQuestionIndex = 0;
-            Debug.Log($"3 answerToggles {_answerOptions.Count}");
             ShowQuestion(_currentQuestionIndex);
+        }
+
+        private async void ShowQuestion(QuestionTemplate<Sprite, string> question, System.Action onAnswered)
+        {
+            if (_generatedQuestion.ContainsKey(question))
+            {
+                FinishQuestion();
+                return;
+            }
+
+            _onAnswered = onAnswered;
+            // _currentQuestionIndex = questionIndex;
+            _currentQuestion =
+                new KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>(question,
+                    _generatedQuestion[question]);
+            _questionImage.sprite = question.Question;
+            await CreateAnswerOptions();
+            for (int i = 0; i < _currentQuestion.Value.Count; i++)
+            {
+                int answerIndex = i;
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetToggleGroup(_toggleGroup);
+            }
         }
 
         private async void ShowQuestion(int questionIndex)
@@ -33,7 +58,7 @@ namespace TriviaGame.Scripts
                 return;
             }
             _currentQuestionIndex = questionIndex;
-            _currentQuestion = _generatedQuestion[questionIndex];
+            // _currentQuestion = _generatedQuestion[questionIndex];
             _questionImage.sprite = _currentQuestion.Key.Question;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
@@ -45,7 +70,6 @@ namespace TriviaGame.Scripts
         }
 
 
-
         private async void CheckResult(int answerIndex)
         {
             var answer = _currentQuestion.Value[answerIndex];
@@ -54,7 +78,8 @@ namespace TriviaGame.Scripts
             AddScore(isCorrect ? 10 : -1 * _currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
             HideResult();
-            ShowQuestion(++_currentQuestionIndex);
+            _onAnswered?.Invoke();
+            // ShowQuestion(++_currentQuestionIndex);
         }
 
     }

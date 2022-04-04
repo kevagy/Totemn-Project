@@ -42,11 +42,11 @@ namespace TriviaGame.Scripts
             StartTimer().Forget();
         }
 
-        protected List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
+        protected Dictionary<QuestionTemplate<Q, A>, List<A>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
         {
             var random = new System.Random();
             var randomList = question.OrderBy(item => random.Next()).ToList();
-            var generatedQuestion = new List<KeyValuePair<QuestionTemplate<Q, A>, List<A>>>();
+            var generatedQuestion = new Dictionary<QuestionTemplate<Q, A>, List<A>>();
             for (int i = 0; i < _numberOfQuestionToShow; i++)
             {
                 List<A> answers = new List<A>();
@@ -61,7 +61,7 @@ namespace TriviaGame.Scripts
                     answers.Add(randomList[num].Answer);
                 }
                 answers = answers.OrderBy(item => random.Next()).ToList();
-                generatedQuestion.Add(new KeyValuePair<QuestionTemplate<Q, A>, List<A>>(randomList[i], answers));
+                generatedQuestion.Add(randomList[i], answers);
             }
             return generatedQuestion;
         }
