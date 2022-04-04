@@ -9,6 +9,12 @@ namespace TriviaGame.Scripts
         [SerializeField] private TMPro.TMP_Text _questionText;
         [SerializeField] private QuestionTemplate<string, string>[] _question;
 
+        public QuestionTemplate<string, string>[] Question
+        {
+            set { _question = value; }
+            get { return _question; }
+        }
+
         private List<KeyValuePair<QuestionTemplate<string, string>, List<string>>> _generatedQuestion;
         private KeyValuePair<QuestionTemplate<string, string>, List<string>> _currentQuestion;
 
@@ -27,6 +33,7 @@ namespace TriviaGame.Scripts
                 FinishQuestion();
                 return;
             }
+
             _currentQuestionIndex = questionIndex;
             _currentQuestion = _generatedQuestion[questionIndex];
             _questionText.text = _currentQuestion.Key.Question;
@@ -34,7 +41,8 @@ namespace TriviaGame.Scripts
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex,
+                    _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }

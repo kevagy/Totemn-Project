@@ -18,7 +18,11 @@ namespace TriviaGame.Scripts
         [SerializeField] private TMPro.TMP_Text _questionText;
         [SerializeField] private Image _questionImage;
         [SerializeField] private QuestionTemplate< CombineTextImage, string>[] _question;
-
+        public QuestionTemplate<CombineTextImage, string>[] Question
+        {
+            set { _question = value; }
+            get { return _question; }
+        }
         private List<KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<string>>> _generatedQuestion = new List<KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<string>>>();
 
         private KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<string>> _currentQuestion;

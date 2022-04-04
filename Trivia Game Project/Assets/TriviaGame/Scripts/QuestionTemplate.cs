@@ -43,6 +43,15 @@ namespace TriviaGame.Scripts
         private const int ToPersentage = 100;
         private int _questionToShow;
 
+        public (bool hasQuestion, QuestionTemplate<Q, A> question) GetQuestion()
+        {
+            int random = UnityEngine.Random.Range(0, Questions.Length - 1);
+            var hasQuestion = _questionToShow > 0;
+            var question = hasQuestion ? Questions[random] : null;
+            _questionToShow--;
+            return (hasQuestion, question);
+        }
+
         public void SetTotalQuestionInLevel(int count)
         {
             _questionToShow = (int) Math.Round(Quantity * count);
