@@ -54,12 +54,12 @@ namespace TriviaGame.Scripts
 
         public void SetTotalQuestionInLevel(int count)
         {
-            _questionToShow = (int) Math.Round(Quantity * count);
+            _questionToShow = (int)Math.Round(Quantity * count);
         }
 
         public float Quantity
         {
-            set => _quantity = (int) Math.Round((double) (Questions.Length / value * ToPersentage));
+            set => _quantity = (int)Math.Round((double)(Questions.Length / value * ToPersentage));
 
             get => _quantity;
         }
