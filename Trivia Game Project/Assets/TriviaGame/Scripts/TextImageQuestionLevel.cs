@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 
 namespace TriviaGame.Scripts
@@ -25,8 +24,10 @@ namespace TriviaGame.Scripts
             set { _question = value; }
             get { return _question; }
         }
-       
-        private Dictionary<QuestionTemplate<CombineTextImage, string>, List<string>> _generatedQuestion = new Dictionary<QuestionTemplate<CombineTextImage, string>, List<string>>();
+
+        private Dictionary<QuestionTemplate<CombineTextImage, string>, List<string>> _generatedQuestion =
+            new Dictionary<QuestionTemplate<CombineTextImage, string>, List<string>>();
+
         private KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<string>> _currentQuestion;
 
         protected override void OnEnable()
@@ -34,10 +35,10 @@ namespace TriviaGame.Scripts
             base.OnEnable();
             _generatedQuestion = GenerateQuestions<CombineTextImage, string>(_question);
             _currentQuestionIndex = 0;
-            ShowQuestion(_currentQuestionIndex);
+            // ShowQuestion(_currentQuestionIndex);
         }
 
-        private async void ShowQuestion(QuestionTemplate<CombineTextImage, string> question, System.Action onAnswered)
+        public async void ShowQuestion(QuestionTemplate<CombineTextImage, string> question, System.Action onAnswered)
         {
             if (_generatedQuestion.ContainsKey(question))
             {
@@ -48,14 +49,15 @@ namespace TriviaGame.Scripts
             _onAnswered = onAnswered;
             // _currentQuestionIndex = questionIndex;
             _currentQuestion =
-                new KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<CombineTextImage>>(question,
+                new KeyValuePair<QuestionTemplate<CombineTextImage, string>, List<string>>(question,
                     _generatedQuestion[question]);
-            _questionImage.sprite = question.Question;
+            _questionImage.sprite = question.Question.ImageValue;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex,
+                    _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
@@ -67,8 +69,9 @@ namespace TriviaGame.Scripts
                 FinishQuestion();
                 return;
             }
+
             _currentQuestionIndex = questionIndex;
-            _currentQuestion = _generatedQuestion[questionIndex];
+            // _currentQuestion = _generatedQuestion[questionIndex];
             _questionText.text = _currentQuestion.Key.Question.TextValue;
             _questionImage.sprite = _currentQuestion.Key.Question.ImageValue;
 
@@ -76,7 +79,8 @@ namespace TriviaGame.Scripts
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex,
+                    _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
@@ -87,9 +91,10 @@ namespace TriviaGame.Scripts
             bool isCorrect = answer.Equals(_currentQuestion.Key.Answer);
             ShowResult(isCorrect);
             AddScore(isCorrect ? 10 : -1 * _currentQuestion.Key.ScorePerQ);
-            await Task.Delay(_timeToShowResult);
+            await UniTask.Delay(_timeToShowResult);
             HideResult();
-            ShowQuestion(++_currentQuestionIndex);
+            _onAnswered?.Invoke();
+            // ShowQuestion(++_currentQuestionIndex);
         }
     }
 }

@@ -37,8 +37,7 @@ namespace TriviaGame.Scripts
     {
         [SerializeField] private SequenceQuestion _type;
         public QuestionTemplate<Q, A>[] Questions;
-        public List<Sprite> Answers;
-
+        
         private int _quantity;
         private const int ToPersentage = 100;
         private int _questionToShow;

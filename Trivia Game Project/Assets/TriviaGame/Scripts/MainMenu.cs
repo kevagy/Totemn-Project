@@ -6,10 +6,9 @@ public class MainMenu : MonoBehaviour
 {
 
     [SerializeField] private Button _playButton;
-    [SerializeField] private LevelController _imageQuestion;
     [SerializeField] private ScorePanel _scorePanel;
+    [SerializeField] private QuestionsLevelController _questionsLevelController;
 
-    private LevelController _openedLevel;
     private void OnEnable()
     {
         _playButton.onClick.AddListener(OnPlayButtonClick);
@@ -22,8 +21,8 @@ public class MainMenu : MonoBehaviour
 
     private void OnPlayButtonClick()
     {
-        _openedLevel = _imageQuestion;
-        _openedLevel.gameObject.SetActive(true);
+        _questionsLevelController.ShowQuestion();
+        _questionsLevelController.gameObject.SetActive(true);
         _playButton.gameObject.SetActive(false);
     }
 
@@ -31,7 +30,7 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(true);
         _playButton.gameObject.SetActive(true);
-        _openedLevel.gameObject.SetActive(false);
+        _questionsLevelController.gameObject.SetActive(false);
     }
 
     public void ShowScore(float score)

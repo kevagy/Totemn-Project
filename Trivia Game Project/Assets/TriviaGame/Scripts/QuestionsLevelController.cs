@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class QuestionsLevelController : MonoBehaviour
 {
+    [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private QuestionsOrder _questionsOrder;
     [SerializeField] private TextQuestionLevel _textQuestionLevel;
     [SerializeField] private ImageQuestionLevel _imageQuestionLevel;
     [SerializeField] private TextImageQuestionLevel _textImageQuestionLevel;
     [SerializeField] private TrueFalseQuestionLevel _trueFalseQuestionLevel;
     [SerializeField] private int _questionInLevel = 10;
+    private int _questionShowed;
 
     private List<IQuestionData> _questionData = new List<IQuestionData>();
 
     private List<IQuestionData> _questionDataShuffle;
     private int _index = 0;
+
+    private GameObject _questionGameObject;
 
     private async void Start()
     {
@@ -45,25 +49,50 @@ public class QuestionsLevelController : MonoBehaviour
         _questionDataShuffle = _questionData.OrderBy(item => random.Next()).ToList();
     }
 
+    
+    
 
-    private void ShowQuestion()
+    public void ShowQuestion()
     {
+        if (_questionShowed >= _questionInLevel)
+        {
+            float score = 0;
+            score += _textQuestionLevel.Score;
+            score += _imageQuestionLevel.Score;
+            score += _textImageQuestionLevel.Score;
+            score += _trueFalseQuestionLevel.Score;
+            _mainMenu.ShowScore(score);
+            _questionShowed = 0;
+            return;
+        }
+
+        _questionGameObject?.SetActive(false);
         bool hasQuestion = false;
+
         while (!hasQuestion)
         {
             switch (_questionDataShuffle[_index].Type)
             {
                 case SequenceQuestion.Image:
-                    var result = _questionsOrder.ImageQuestion.GetQuestion();
-                    hasQuestion = result.hasQuestion;
+                    var imageQuestion = _questionsOrder.ImageQuestion.GetQuestion();
+                    hasQuestion = imageQuestion.hasQuestion;
                     if (hasQuestion)
                     {
-                        _imageQuestionLevel.Question = result.question;
+                        _imageQuestionLevel.ShowQuestion(imageQuestion.question, ShowQuestion);
+                        _questionGameObject = _imageQuestionLevel.gameObject;
                     }
+
                     break;
 
                 case SequenceQuestion.Text:
-                    _textQuestionLevel.Question = _questionsOrder.TextQuestion.Questions;
+                    var textQuestion = _questionsOrder.TextQuestion.GetQuestion();
+                    hasQuestion = textQuestion.hasQuestion;
+                    if (hasQuestion)
+                    {
+                        _textQuestionLevel.ShowQuestion(textQuestion.question, ShowQuestion);
+                        _questionGameObject = _textQuestionLevel.gameObject;
+                    }
+
                     break;
 
                 case SequenceQuestion.PresetAnswers:
@@ -71,17 +100,35 @@ public class QuestionsLevelController : MonoBehaviour
                     break;
 
                 case SequenceQuestion.TextImage:
-                    _textImageQuestionLevel.Question = _questionsOrder.TextImageQuestion.Questions;
+                    var textImageQuestion = _questionsOrder.TextImageQuestion.GetQuestion();
+                    hasQuestion = textImageQuestion.hasQuestion;
+                    if (hasQuestion)
+                    {
+                        _textImageQuestionLevel.ShowQuestion(textImageQuestion.question, ShowQuestion);
+                        _questionGameObject = _textImageQuestionLevel.gameObject;
+                    }
+
                     break;
 
                 case SequenceQuestion.TrueFalse:
                     _trueFalseQuestionLevel.Question = _questionsOrder.TrueFalseQuestion.Questions;
+
+                    var trueFalseQuestion = _questionsOrder.TrueFalseQuestion.GetQuestion();
+                    hasQuestion = trueFalseQuestion.hasQuestion;
+                    if (hasQuestion)
+                    {
+                        _trueFalseQuestionLevel.ShowQuestion(trueFalseQuestion.question, ShowQuestion);
+                        _questionGameObject = _trueFalseQuestionLevel.gameObject;
+                    }
+
                     break;
             }
 
+            _questionGameObject?.SetActive(true);
+            _questionShowed++;
 
             _index++;
-            if (_index >= _questionDataShuffle.Count)//TODO think how to improve
+            if (_index >= _questionDataShuffle.Count) //TODO think how to improve
             {
                 _index = 0;
                 break;

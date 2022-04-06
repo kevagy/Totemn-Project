@@ -24,11 +24,12 @@ namespace TriviaGame.Scripts
             base.OnEnable();
             _generatedQuestion = GenerateQuestions<Sprite, string>(_question);
             _currentQuestionIndex = 0;
-            ShowQuestion(_currentQuestionIndex);
+            // ShowQuestion(_currentQuestionIndex);
         }
 
-        private async void ShowQuestion(QuestionTemplate<Sprite, string> question, System.Action onAnswered)
+        public async void ShowQuestion(QuestionTemplate<Sprite, string> question, System.Action onAnswered)
         {
+            gameObject.SetActive(true);
             if (_generatedQuestion.ContainsKey(question))
             {
                 FinishQuestion();
@@ -79,6 +80,7 @@ namespace TriviaGame.Scripts
             await Task.Delay(_timeToShowResult);
             HideResult();
             _onAnswered?.Invoke();
+            gameObject.SetActive(false);
             // ShowQuestion(++_currentQuestionIndex);
         }
 

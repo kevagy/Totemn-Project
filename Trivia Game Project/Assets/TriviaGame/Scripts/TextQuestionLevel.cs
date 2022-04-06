@@ -24,10 +24,10 @@ namespace TriviaGame.Scripts
             _answerOptions = new List<AnswerOption>();
             _generatedQuestion = GenerateQuestions<string, string>(_question);
             
-            ShowQuestion(_currentQuestionIndex);
+            // ShowQuestion(_currentQuestionIndex);
         }
 
-        private async void ShowQuestion(QuestionTemplate<string, string> question, System.Action onAnswered)
+        public async void ShowQuestion(QuestionTemplate<string, string> question, System.Action onAnswered)
         {
             if (_generatedQuestion.ContainsKey(question))
             {
@@ -59,7 +59,7 @@ namespace TriviaGame.Scripts
             }
 
             _currentQuestionIndex = questionIndex;
-            _currentQuestion = _generatedQuestion[questionIndex];
+            // _currentQuestion = _generatedQuestion[questionIndex];
             _questionText.text = _currentQuestion.Key.Question;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)

@@ -34,7 +34,10 @@ namespace TriviaGame.Scripts
         protected int _currentQuestionIndex = 0;
         protected float _score;
 
+        public float Score => _score;
+        
         private bool _isTimerRunning;
+        
         protected virtual void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
