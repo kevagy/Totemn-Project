@@ -65,15 +65,15 @@ public class QuestionsLevelController : MonoBehaviour
                 case SequenceQuestion.Text:
                     _textQuestionLevel.Question = _questionsOrder.TextQuestion.Questions;
                     break;
-                
+
                 case SequenceQuestion.PresetAnswers:
-//TODO Level controller 
+                    //TODO Level controller 
                     break;
-                
+
                 case SequenceQuestion.TextImage:
                     _textImageQuestionLevel.Question = _questionsOrder.TextImageQuestion.Questions;
                     break;
-                
+
                 case SequenceQuestion.TrueFalse:
                     _trueFalseQuestionLevel.Question = _questionsOrder.TrueFalseQuestion.Questions;
                     break;

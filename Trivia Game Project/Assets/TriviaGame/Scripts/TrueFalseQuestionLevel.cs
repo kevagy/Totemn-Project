@@ -14,5 +14,7 @@ namespace TriviaGame.Scripts
             set { _question = value; }
             get { return _question; }
         }
+
+
     }
 }

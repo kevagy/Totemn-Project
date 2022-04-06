@@ -8,14 +8,14 @@ namespace TriviaGame.Scripts
     {
         [SerializeField] private TMPro.TMP_Text _questionText;
         [SerializeField] private QuestionTemplate<string, string>[] _question;
-
+        private System.Action _onAnswered;
         public QuestionTemplate<string, string>[] Question
         {
             set { _question = value; }
             get { return _question; }
         }
+        private Dictionary<QuestionTemplate<string, string>, List<string>> _generatedQuestion = new Dictionary<QuestionTemplate<string, string>, List<string>>();
 
-        private List<KeyValuePair<QuestionTemplate<string, string>, List<string>>> _generatedQuestion;
         private KeyValuePair<QuestionTemplate<string, string>, List<string>> _currentQuestion;
 
         protected override void OnEnable()
@@ -23,7 +23,31 @@ namespace TriviaGame.Scripts
             base.OnEnable();
             _answerOptions = new List<AnswerOption>();
             _generatedQuestion = GenerateQuestions<string, string>(_question);
+            
             ShowQuestion(_currentQuestionIndex);
+        }
+
+        private async void ShowQuestion(QuestionTemplate<string, string> question, System.Action onAnswered)
+        {
+            if (_generatedQuestion.ContainsKey(question))
+            {
+                FinishQuestion();
+                return;
+            }
+
+            _onAnswered = onAnswered;
+            // _currentQuestionIndex = questionIndex;
+            _currentQuestion =
+                new KeyValuePair<QuestionTemplate<string, string>, List<string>>(question,
+                    _generatedQuestion[question]);
+            _questionText.text = question.Question;
+            await CreateAnswerOptions();
+            for (int i = 0; i < _currentQuestion.Value.Count; i++)
+            {
+                int answerIndex = i;
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetToggleGroup(_toggleGroup);
+            }
         }
 
         private async void ShowQuestion(int questionIndex)
