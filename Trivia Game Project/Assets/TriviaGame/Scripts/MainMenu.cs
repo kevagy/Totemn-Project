@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
+    [SerializeField] private GameObject _mainMenuScreen;
     [SerializeField] private Button _playButton;
     [SerializeField] private ScorePanel _scorePanel;
     [SerializeField] private QuestionsLevelController _questionsLevelController;
@@ -22,15 +22,13 @@ public class MainMenu : MonoBehaviour
     private void OnPlayButtonClick()
     {
         _questionsLevelController.ShowQuestion();
-        _questionsLevelController.gameObject.SetActive(true);
-        _playButton.gameObject.SetActive(false);
+        _mainMenuScreen.gameObject.SetActive(false);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
-        _playButton.gameObject.SetActive(true);
-        _questionsLevelController.gameObject.SetActive(false);
+        _mainMenuScreen.gameObject.SetActive(true);
     }
 
     public void ShowScore(float score)

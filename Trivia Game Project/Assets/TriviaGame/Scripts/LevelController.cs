@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 namespace TriviaGame.Scripts
 {
-
     public class LevelController : MonoBehaviour
     {
         [SerializeField] private Button _closeButton;
@@ -19,13 +18,8 @@ namespace TriviaGame.Scripts
         [SerializeField] protected int _numberOfQuestionToShow = 12;
         [SerializeField] protected int _nubmerOfAnswers = 4;
 
-        [Tooltip("Need to be in ms")]
-        [SerializeField] protected int _timeToShowResult = 500;
-
-        [SerializeField] private TMPro.TMP_Text _timerText;
-
-        [Tooltip("Time to end in seconds")]
-        [SerializeField] private int _timeToEnd = 60;
+        [Tooltip("Need to be in ms")] [SerializeField]
+        protected int _timeToShowResult = 500;
 
         [SerializeField] private MainMenu _mainMenu;
         [SerializeField] private TMPro.TMP_Text _scoreText;
@@ -35,14 +29,11 @@ namespace TriviaGame.Scripts
         protected float _score;
 
         public float Score => _score;
-        
-        private bool _isTimerRunning;
-        
+
         protected virtual void OnEnable()
         {
             _closeButton.onClick.AddListener(OnCloseButtonClick);
             _answerResult.gameObject.SetActive(false);
-            StartTimer().Forget();
         }
 
         protected Dictionary<QuestionTemplate<Q, A>, List<A>> GenerateQuestions<Q, A>(QuestionTemplate<Q, A>[] question)
@@ -61,11 +52,14 @@ namespace TriviaGame.Scripts
                     {
                         num = 0;
                     }
+
                     answers.Add(randomList[num].Answer);
                 }
+
                 answers = answers.OrderBy(item => random.Next()).ToList();
                 generatedQuestion.Add(randomList[i], answers);
             }
+
             return generatedQuestion;
         }
 
@@ -100,36 +94,21 @@ namespace TriviaGame.Scripts
             _answerResult.gameObject.SetActive(true);
             _answerResult.sprite = isCorrect ? _correct : _incorrect;
         }
+
         protected void HideResult()
         {
             _answerResult.gameObject.SetActive(false);
         }
 
-        private async UniTask StartTimer()
-        {
-            int timer = _timeToEnd;
-            _isTimerRunning = true;
-            while (timer > 0 && _isTimerRunning)
-            {
-                await UniTask.Delay(1000);
-                timer -= 1;
-                TimeSpan dateTime = new TimeSpan(0, 0, timer);
-                _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
-            }
-
-            _isTimerRunning = false;
-            FinishQuestion();
-        }
 
         protected void AddScore(float score)
         {
             _score = Mathf.Clamp(_score + score, 0, float.MaxValue);
-            _scoreText.text = _score.ToString();
+            // _scoreText.text = _score.ToString();
         }
 
         protected void FinishQuestion()
         {
-            _isTimerRunning = false;
             _mainMenu.ShowScore(_score);
         }
     }

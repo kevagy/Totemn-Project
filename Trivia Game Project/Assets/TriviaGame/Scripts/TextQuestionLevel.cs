@@ -29,11 +29,11 @@ namespace TriviaGame.Scripts
 
         public async void ShowQuestion(QuestionTemplate<string, string> question, System.Action onAnswered)
         {
-            if (_generatedQuestion.ContainsKey(question))
-            {
-                FinishQuestion();
-                return;
-            }
+            // if (_generatedQuestion.ContainsKey(question))
+            // {
+            //     FinishQuestion();
+            //     return;
+            // }
 
             _onAnswered = onAnswered;
             // _currentQuestionIndex = questionIndex;
@@ -59,7 +59,6 @@ namespace TriviaGame.Scripts
             }
 
             _currentQuestionIndex = questionIndex;
-            // _currentQuestion = _generatedQuestion[questionIndex];
             _questionText.text = _currentQuestion.Key.Question;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
@@ -79,7 +78,8 @@ namespace TriviaGame.Scripts
             AddScore(isCorrect ? 10 : -1 * _currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
             HideResult();
-            ShowQuestion(++_currentQuestionIndex);
+            _onAnswered?.Invoke();
+            // ShowQuestion(++_currentQuestionIndex);
         }
     }
 }

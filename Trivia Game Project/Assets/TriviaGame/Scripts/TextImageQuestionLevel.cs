@@ -40,11 +40,11 @@ namespace TriviaGame.Scripts
 
         public async void ShowQuestion(QuestionTemplate<CombineTextImage, string> question, System.Action onAnswered)
         {
-            if (_generatedQuestion.ContainsKey(question))
-            {
-                FinishQuestion();
-                return;
-            }
+            // if (_generatedQuestion.ContainsKey(question))
+            // {
+            //     FinishQuestion();
+            //     return;
+            // }
 
             _onAnswered = onAnswered;
             // _currentQuestionIndex = questionIndex;

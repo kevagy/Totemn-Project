@@ -31,7 +31,7 @@ namespace TriviaGame.Scripts
                 new KeyValuePair<QuestionTemplate<string, bool>, List<bool>>(question,
                     new List<bool> {true, false});
             _questionText.text = question.Question;
-            await CreateAnswerOptions();
+            // await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;

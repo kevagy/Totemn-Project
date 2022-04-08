@@ -30,11 +30,11 @@ namespace TriviaGame.Scripts
         public async void ShowQuestion(QuestionTemplate<Sprite, string> question, System.Action onAnswered)
         {
             gameObject.SetActive(true);
-            if (_generatedQuestion.ContainsKey(question))
-            {
-                FinishQuestion();
-                return;
-            }
+            // if (_generatedQuestion.ContainsKey(question))
+            // {
+            //     FinishQuestion();
+            //     return;
+            // }
 
             _onAnswered = onAnswered;
             // _currentQuestionIndex = questionIndex;

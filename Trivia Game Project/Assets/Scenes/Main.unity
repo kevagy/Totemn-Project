@@ -4593,7 +4593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1214298883}
   _closeButton: {fileID: 1112979614}
-  _mainMenu: {fileID: 0}
+  _mainMenu: {fileID: 1691986323}
 --- !u!1 &628706079
 GameObject:
   m_ObjectHideFlags: 0
@@ -5866,7 +5866,7 @@ MonoBehaviour:
   _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1386834333}
-  _questionText: {fileID: 0}
+  _questionText: {fileID: 1184943890}
   _questionImage: {fileID: 0}
   _question: []
   _answerOptions:
@@ -7385,7 +7385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Some Question
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9001,10 +9001,10 @@ RectTransform:
   m_Father: {fileID: 871786410}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1107247631
 GameObject:
@@ -13697,6 +13697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f744f5c1b00710f4996a442888b26383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainMenuScreen: {fileID: 1094877360}
   _playButton: {fileID: 369137875}
   _scorePanel: {fileID: 611206851}
   _questionsLevelController: {fileID: 871786413}
