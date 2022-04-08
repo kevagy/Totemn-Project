@@ -37,7 +37,8 @@ namespace TriviaGame.Scripts
     {
         [SerializeField] private SequenceQuestion _type;
         public QuestionTemplate<Q, A>[] Questions;
-        
+        public List<Sprite> Answers;
+
         private int _quantity;
         private const int ToPersentage = 100;
         private int _questionToShow;
@@ -53,12 +54,12 @@ namespace TriviaGame.Scripts
 
         public void SetTotalQuestionInLevel(int count)
         {
-            _questionToShow = (int)Math.Round(Quantity * count);
+            _questionToShow = (int) Math.Round(Quantity * count);
         }
 
         public float Quantity
         {
-            set => _quantity = (int)Math.Round((double)(Questions.Length / value * ToPersentage));
+            set => _quantity = (int) Math.Round((double) (Questions.Length / value * ToPersentage));
 
             get => _quantity;
         }
