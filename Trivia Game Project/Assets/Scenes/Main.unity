@@ -7534,7 +7534,8 @@ MonoBehaviour:
   _questionText: {fileID: 0}
   _questionImage: {fileID: 0}
   _question: []
-  _answerOptions: []
+  _answerOptions:
+  - {fileID: 0}
 --- !u!1 &965149910
 GameObject:
   m_ObjectHideFlags: 0
