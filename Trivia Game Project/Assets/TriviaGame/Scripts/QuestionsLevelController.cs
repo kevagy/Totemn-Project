@@ -13,6 +13,7 @@ public class QuestionsLevelController : MonoBehaviour
     [SerializeField] private ImageQuestionLevel _imageQuestionLevel;
     [SerializeField] private TextImageQuestionLevel _textImageQuestionLevel;
     [SerializeField] private TrueFalseQuestionLevel _trueFalseQuestionLevel;
+    [SerializeField] private PresetsLevelController _presetsQuestionLevel;
 
     [SerializeField] private int _questionInLevel = 10;
     [SerializeField] private GameObject _timerAndScorePanel;
@@ -36,7 +37,7 @@ public class QuestionsLevelController : MonoBehaviour
     private void Start()
     {
         int numberOfTotalQuestion = 0;
-        _timerAndScorePanel.SetActive(false);
+        _timerAndScorePanel?.SetActive(false);
         _questionData.Add(_questionsOrder.TextQuestion);
         _questionData.Add(_questionsOrder.ImageQuestion);
         _questionData.Add(_questionsOrder.TextImageQuestion);
@@ -77,6 +78,7 @@ public class QuestionsLevelController : MonoBehaviour
     {
         StartTimer().Forget();
         CalculateAndShowScore();
+        _questionGameObject?.SetActive(false);
         if (_questionShowed >= _questionInLevel)
         {
             _mainMenu.ShowScore(_score);
@@ -84,7 +86,7 @@ public class QuestionsLevelController : MonoBehaviour
             return;
         }
 
-        _questionGameObject?.SetActive(false);
+
         bool hasQuestion = false;
 
         while (!hasQuestion)
@@ -118,7 +120,17 @@ public class QuestionsLevelController : MonoBehaviour
                     break;
 
                 case SequenceQuestion.PresetAnswers:
-                    //TODO Level controller 
+                    _presetsQuestionLevel.Question = _questionsOrder.PopulationMidQuestion.Questions;
+
+                    var presetsQuestion = _questionsOrder.PopulationMidQuestion.GetQuestion();
+                    hasQuestion = presetsQuestion.hasQuestion;
+                    if (hasQuestion)
+                    {
+                        _presetsQuestionLevel.gameObject.SetActive(true);
+                        _presetsQuestionLevel.ShowQuestion(presetsQuestion.question, ShowQuestion);
+                        _questionGameObject = _presetsQuestionLevel.gameObject;
+                    }
+
                     break;
 
                 case SequenceQuestion.TextImage:

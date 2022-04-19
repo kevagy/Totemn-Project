@@ -21,7 +21,6 @@ namespace TriviaGame.Scripts
         protected override void OnEnable()
         {
             base.OnEnable();
-            _answerOptions = new List<AnswerOption>();
             _generatedQuestion = GenerateQuestions<string, string>(_question);
             
             // ShowQuestion(_currentQuestionIndex);
