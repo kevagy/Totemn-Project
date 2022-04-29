@@ -20,7 +20,11 @@ namespace TriviaGame.Scripts
         Image,
         TextImage,
         TrueFalse,
-        PresetAnswers
+        CountryPopulationLow,
+        CountryPopulationMid,
+        CountryPopulationHigh,
+        UrbanPopulation,
+        BorderQuestions,
     }
 
     public interface IQuestionData

@@ -10,8 +10,9 @@ namespace TriviaGame.Scripts
     {
         [SerializeField] private TMPro.TMP_Text _questionText;
         [SerializeField] private Image _questionImage;
+
         [SerializeField] private QuestionTemplate<string, int>[] _question;
-        [SerializeField] private new List<AnswerOption> _answerOptions = new List<AnswerOption>();
+        // [SerializeField] private new List<AnswerOption> _answerOptions = new List<AnswerOption>();
 
         private Dictionary<QuestionTemplate<string, int>, List<int>> _generatedQuestion =
             new Dictionary<QuestionTemplate<string, int>, List<int>>();
@@ -25,6 +26,8 @@ namespace TriviaGame.Scripts
             get { return _question; }
         }
 
+        public List<Sprite> AnswerSprites;
+
         public void ShowQuestion(QuestionTemplate<string, int> question, System.Action onAnswered)
         {
             _onAnswered = onAnswered;
@@ -37,11 +40,10 @@ namespace TriviaGame.Scripts
             _currentQuestion =
                 new KeyValuePair<QuestionTemplate<string, int>, List<int>>(question, answers);
             _questionText.text = question.Question;
-            // await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(String.Empty, answerIndex,
+                _answerOptions[i].SetupAnswer(AnswerSprites[i], answerIndex,
                     _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }

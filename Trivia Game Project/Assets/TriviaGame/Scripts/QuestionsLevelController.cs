@@ -15,6 +15,7 @@ public class QuestionsLevelController : MonoBehaviour
     [SerializeField] private TrueFalseQuestionLevel _trueFalseQuestionLevel;
     [SerializeField] private PresetsLevelController _presetsQuestionLevel;
 
+
     [SerializeField] private int _questionInLevel = 10;
     [SerializeField] private GameObject _timerAndScorePanel;
     [SerializeField] private TMPro.TMP_Text _timerText;
@@ -33,6 +34,51 @@ public class QuestionsLevelController : MonoBehaviour
     private GameObject _questionGameObject;
     private bool _isTimerRunning;
     private float _score = 0;
+
+    private Dictionary<SequenceQuestion, Action> _questionSetups;
+
+    public QuestionsLevelController()
+    {
+        _questionSetups = new Dictionary<SequenceQuestion, Action>
+        {
+            {SequenceQuestion.Image, SetupImage},
+            {SequenceQuestion.Text, SetupText},
+            {SequenceQuestion.TextImage, SetupTextImage},
+            {SequenceQuestion.TrueFalse, SetupTrueFalse},
+            {SequenceQuestion.CountryPopulationLow, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+            {SequenceQuestion.CountryPopulationMid, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+            {SequenceQuestion.CountryPopulationHigh, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+            {SequenceQuestion.UrbanPopulation, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+            {SequenceQuestion.BorderQuestions, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+        };
+    }
+
+    private void SetupImage()
+    {
+        _imageQuestionLevel.Question = _questionsOrder.ImageQuestion.Questions;
+        var imageQuestion = _questionsOrder.ImageQuestion.GetQuestion();
+        var hasQuestion = imageQuestion.hasQuestion;
+        if (hasQuestion)
+        {
+            _imageQuestionLevel.gameObject.SetActive(true);
+            _imageQuestionLevel.ShowQuestion(imageQuestion.question, ShowQuestion);
+            _questionGameObject = _imageQuestionLevel.gameObject;
+        }
+    }
+
+    private void SetupPopulation(QuestionData<string, int> data)
+    {
+        _presetsQuestionLevel.Question = data.Questions;
+        _presetsQuestionLevel.AnswerSprites = data.Answers;
+        var presetsQuestion = data.GetQuestion();
+        var hasQuestion = presetsQuestion.hasQuestion;
+        if (hasQuestion)
+        {
+            _presetsQuestionLevel.gameObject.SetActive(true);
+            _presetsQuestionLevel.ShowQuestion(presetsQuestion.question, ShowQuestion);
+            _questionGameObject = _presetsQuestionLevel.gameObject;
+        }
+    }
 
     private void Start()
     {
@@ -91,18 +137,10 @@ public class QuestionsLevelController : MonoBehaviour
 
         while (!hasQuestion)
         {
-            switch (_questionDataShuffle[_index].Type)
+            _questionSetups[_questionDataShuffle[_index].Type]?.Invoke();
+            switch (_questionDataShuffle[_index].Type)//DELETE
             {
                 case SequenceQuestion.Image:
-                    _imageQuestionLevel.Question = _questionsOrder.ImageQuestion.Questions;
-                    var imageQuestion = _questionsOrder.ImageQuestion.GetQuestion();
-                    hasQuestion = imageQuestion.hasQuestion;
-                    if (hasQuestion)
-                    {
-                        _imageQuestionLevel.gameObject.SetActive(true);
-                        _imageQuestionLevel.ShowQuestion(imageQuestion.question, ShowQuestion);
-                        _questionGameObject = _imageQuestionLevel.gameObject;
-                    }
 
                     break;
 
@@ -119,17 +157,8 @@ public class QuestionsLevelController : MonoBehaviour
 
                     break;
 
-                case SequenceQuestion.PresetAnswers:
-                    _presetsQuestionLevel.Question = _questionsOrder.PopulationMidQuestion.Questions;
+                case SequenceQuestion.CountryPopulationLow:
 
-                    var presetsQuestion = _questionsOrder.PopulationMidQuestion.GetQuestion();
-                    hasQuestion = presetsQuestion.hasQuestion;
-                    if (hasQuestion)
-                    {
-                        _presetsQuestionLevel.gameObject.SetActive(true);
-                        _presetsQuestionLevel.ShowQuestion(presetsQuestion.question, ShowQuestion);
-                        _questionGameObject = _presetsQuestionLevel.gameObject;
-                    }
 
                     break;
 
@@ -159,7 +188,7 @@ public class QuestionsLevelController : MonoBehaviour
                     }
 
                     break;
-            }
+            } //DELETE
 
             _questionShowed++;
 
