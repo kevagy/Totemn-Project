@@ -25,7 +25,7 @@ public class AnswerOption : MonoBehaviour
         _index = index;
         _onChoosedBoolAnswer = onChoosedAnswer;
     }
-
+    
     public void SetupAnswer(Sprite sprite, int index, Action<int> onChoosedAnswer)
     {
         _image.sprite = sprite;
@@ -56,4 +56,5 @@ public class AnswerOption : MonoBehaviour
             _onChoosedBoolAnswer?.Invoke(_isTrueAnswer);
         }
     }
+
 }

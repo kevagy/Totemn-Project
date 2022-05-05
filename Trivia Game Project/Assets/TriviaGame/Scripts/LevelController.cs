@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -24,7 +23,7 @@ namespace TriviaGame.Scripts
         [SerializeField] private MainMenu _mainMenu;
         [SerializeField] private TMPro.TMP_Text _scoreText;
 
-        protected List<AnswerOption> _answerOptions = new List<AnswerOption>();
+        [SerializeField] protected List<AnswerOption> _answerOptions = new List<AnswerOption>();
         protected int _currentQuestionIndex = 0;
         protected float _score;
 
