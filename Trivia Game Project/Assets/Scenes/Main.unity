@@ -278,8 +278,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 10
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 893021263}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1947958884}
   _questionImage: {fileID: 1187710709}
@@ -1074,6 +1072,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!114 &101486279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1467,8 +1469,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 10
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 893021263}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1947958884}
   _questionText: {fileID: 1704590604}
@@ -5036,8 +5036,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 10
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 679813169}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1214298883}
   _questionText: {fileID: 940013379}
@@ -5862,8 +5860,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 2
   _timeToShowResult: 500
-  _timerText: {fileID: 975335780}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1386834333}
   _questionText: {fileID: 1184943890}
@@ -6754,6 +6750,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 676242741}
   _trueFalseQuestionLevel: {fileID: 720965051}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!1 &872858072
 GameObject:
   m_ObjectHideFlags: 0
@@ -7320,8 +7320,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 582307657}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 696388104}
   _questionText: {fileID: 0}
@@ -7527,8 +7525,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 698156764}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1461301888}
   _questionText: {fileID: 0}
@@ -9071,8 +9067,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 2075599573}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1121547391}
   _questionText: {fileID: 0}
@@ -9390,8 +9384,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 0}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 0}
   _questionsOrder: {fileID: 11400000, guid: 4f322ade76ed75642b262fea113f7853, type: 2}
@@ -10934,6 +10926,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!114 &1324494814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12856,6 +12852,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!114 &1572391914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13546,6 +13546,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!114 &1655862029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15216,6 +15220,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!114 &1884776963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16327,8 +16335,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 1085497983}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1139544635}
   _questionText: {fileID: 0}
@@ -16723,6 +16729,10 @@ MonoBehaviour:
   _textImageQuestionLevel: {fileID: 0}
   _trueFalseQuestionLevel: {fileID: 0}
   _questionInLevel: 10
+  _timerAndScorePanel: {fileID: 0}
+  _timerText: {fileID: 0}
+  _scoreText: {fileID: 0}
+  _timeToEnd: 60
 --- !u!1 &1999450793
 GameObject:
   m_ObjectHideFlags: 0
@@ -16864,8 +16874,6 @@ MonoBehaviour:
   _numberOfQuestionToShow: 12
   _nubmerOfAnswers: 4
   _timeToShowResult: 500
-  _timerText: {fileID: 1964656809}
-  _timeToEnd: 60
   _mainMenu: {fileID: 0}
   _scoreText: {fileID: 1549992867}
   _questionText: {fileID: 0}
