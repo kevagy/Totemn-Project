@@ -10,12 +10,15 @@ namespace TriviaGame.Scripts
         [SerializeField] private Image _questionImage;
         [SerializeField] private QuestionTemplate<Sprite, string>[] _question;
         private System.Action _onAnswered;
+
         public QuestionTemplate<Sprite, string>[] Question
         {
             set { _question = value; }
             get { return _question; }
         }
-        private Dictionary<QuestionTemplate<Sprite, string>, List<string>> _generatedQuestion = new Dictionary<QuestionTemplate<Sprite, string>, List<string>>();
+
+        private Dictionary<QuestionTemplate<Sprite, string>, List<string>> _generatedQuestion =
+            new Dictionary<QuestionTemplate<Sprite, string>, List<string>>();
 
         private KeyValuePair<QuestionTemplate<Sprite, string>, List<string>> _currentQuestion;
 
@@ -38,15 +41,22 @@ namespace TriviaGame.Scripts
 
             _onAnswered = onAnswered;
             // _currentQuestionIndex = questionIndex;
-            _currentQuestion =
-                new KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>(question,
-                    _generatedQuestion[question]);
+            if (!_generatedQuestion.ContainsKey(question))
+            {
+                Hide();
+                Debug.LogError($"Key was not found");
+                return;
+            }
+            _currentQuestion = new KeyValuePair<QuestionTemplate<Sprite, string>, List<string>>(question,
+                _generatedQuestion[question]);
+
             _questionImage.sprite = question.Question;
             await CreateAnswerOptions();
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], answerIndex,
+                    _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
@@ -58,6 +68,7 @@ namespace TriviaGame.Scripts
                 FinishQuestion();
                 return;
             }
+
             _currentQuestionIndex = questionIndex;
             // _currentQuestion = _generatedQuestion[questionIndex];
             _questionImage.sprite = _currentQuestion.Key.Question;
@@ -65,7 +76,8 @@ namespace TriviaGame.Scripts
             for (int i = 0; i < _currentQuestion.Value.Count; i++)
             {
                 int answerIndex = i;
-                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex, _ => { CheckResult(answerIndex); });
+                _answerOptions[i].SetupAnswer(_currentQuestion.Value[i], questionIndex,
+                    _ => { CheckResult(answerIndex); });
                 _answerOptions[i].SetToggleGroup(_toggleGroup);
             }
         }
@@ -78,11 +90,15 @@ namespace TriviaGame.Scripts
             ShowResult(isCorrect);
             AddScore(isCorrect ? 10 : -1 * _currentQuestion.Key.ScorePerQ);
             await Task.Delay(_timeToShowResult);
-            HideResult();
-            _onAnswered?.Invoke();
-            gameObject.SetActive(false);
+            Hide();
             // ShowQuestion(++_currentQuestionIndex);
         }
 
+        private void Hide()
+        {
+            HideResult();
+            _onAnswered?.Invoke();
+            gameObject.SetActive(false);
+        }
     }
 }

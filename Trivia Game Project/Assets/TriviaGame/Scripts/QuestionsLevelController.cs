@@ -34,6 +34,7 @@ public class QuestionsLevelController : MonoBehaviour
     private GameObject _questionGameObject;
     private bool _isTimerRunning;
     private float _score = 0;
+    bool _hasQuestion = false;
 
     private Dictionary<SequenceQuestion, Action> _questionSetups;
 
@@ -47,7 +48,10 @@ public class QuestionsLevelController : MonoBehaviour
             {SequenceQuestion.TrueFalse, () => { SetupTrueFalse(_questionsOrder.TrueFalseQuestion); }},
             {SequenceQuestion.CountryPopulationLow, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
             {SequenceQuestion.CountryPopulationMid, () => { SetupPopulation(_questionsOrder.PopulationMidQuestion); }},
-            {SequenceQuestion.CountryPopulationHigh, () => { SetupPopulation(_questionsOrder.PopulationHighQuestion); }},
+            {
+                SequenceQuestion.CountryPopulationHigh,
+                () => { SetupPopulation(_questionsOrder.PopulationHighQuestion); }
+            },
             {SequenceQuestion.UrbanPopulation, () => { SetupPopulation(_questionsOrder.UrbanPopulationQuestion); }},
             {SequenceQuestion.BorderQuestions, () => { SetupPopulation(_questionsOrder.BordersQuestion); }},
         };
@@ -57,8 +61,8 @@ public class QuestionsLevelController : MonoBehaviour
     {
         _trueFalseQuestionLevel.Question = data.Questions;
         var trueFalseQuestion = data.GetQuestion();
-        var hasQuestion = trueFalseQuestion.hasQuestion;
-        if (hasQuestion)
+        _hasQuestion = trueFalseQuestion.hasQuestion;
+        if (_hasQuestion)
         {
             _trueFalseQuestionLevel.gameObject.SetActive(true);
             _trueFalseQuestionLevel.ShowQuestion(trueFalseQuestion.question, ShowQuestion);
@@ -70,8 +74,8 @@ public class QuestionsLevelController : MonoBehaviour
     {
         _textImageQuestionLevel.Question = data.Questions;
         var textImageQuestion = data.GetQuestion();
-        var hasQuestion = textImageQuestion.hasQuestion;
-        if (hasQuestion)
+        _hasQuestion = textImageQuestion.hasQuestion;
+        if (_hasQuestion)
         {
             _textImageQuestionLevel.gameObject.SetActive(true);
             _textImageQuestionLevel.ShowQuestion(textImageQuestion.question, ShowQuestion);
@@ -83,8 +87,8 @@ public class QuestionsLevelController : MonoBehaviour
     {
         _textQuestionLevel.Question = data.Questions;
         var textQuestion = data.GetQuestion();
-        var hasQuestion = textQuestion.hasQuestion;
-        if (hasQuestion)
+        _hasQuestion = textQuestion.hasQuestion;
+        if (_hasQuestion)
         {
             _textQuestionLevel.gameObject.SetActive(true);
             _textQuestionLevel.ShowQuestion(textQuestion.question, ShowQuestion);
@@ -93,13 +97,12 @@ public class QuestionsLevelController : MonoBehaviour
     }
 
 
-
     private void SetupImage(QuestionData<Sprite, string> data)
     {
         _imageQuestionLevel.Question = data.Questions;
         var imageQuestion = data.GetQuestion();
-        var hasQuestion = imageQuestion.hasQuestion;
-        if (hasQuestion)
+        _hasQuestion = imageQuestion.hasQuestion;
+        if (_hasQuestion)
         {
             _imageQuestionLevel.gameObject.SetActive(true);
             _imageQuestionLevel.ShowQuestion(imageQuestion.question, ShowQuestion);
@@ -112,8 +115,8 @@ public class QuestionsLevelController : MonoBehaviour
         _presetsQuestionLevel.Question = data.Questions;
         _presetsQuestionLevel.AnswerSprites = data.Answers;
         var presetsQuestion = data.GetQuestion();
-        var hasQuestion = presetsQuestion.hasQuestion;
-        if (hasQuestion)
+        _hasQuestion = presetsQuestion.hasQuestion;
+        if (_hasQuestion)
         {
             _presetsQuestionLevel.gameObject.SetActive(true);
             _presetsQuestionLevel.ShowQuestion(presetsQuestion.question, ShowQuestion);
@@ -168,19 +171,16 @@ public class QuestionsLevelController : MonoBehaviour
         _questionGameObject?.SetActive(false);
         if (_questionShowed >= _questionInLevel)
         {
-            _mainMenu.ShowScore(_score);
-            _questionShowed = 0;
+            EndOfQuestions();
             return;
         }
 
+        _hasQuestion = false;
 
-        bool hasQuestion = false;
-
-        while (!hasQuestion)
+        while (!_hasQuestion)
         {
             _questionSetups[_questionDataShuffle[_index].Type]?.Invoke();
             _questionShowed++;
-
             _index++;
             if (_index >= _questionDataShuffle.Count) //TODO think how to improve
             {
@@ -188,29 +188,36 @@ public class QuestionsLevelController : MonoBehaviour
                 break;
             }
         }
+    }
 
-        async UniTask StartTimer()
+    async UniTask StartTimer()
+    {
+        if (_isTimerRunning)
         {
-            if (_isTimerRunning)
-            {
-                return;
-            }
-
-            int timer = _timeToEnd;
-            _isTimerRunning = true;
-            _timerAndScorePanel.SetActive(_isTimerRunning);
-
-            while (timer > 0 && _isTimerRunning)
-            {
-                await UniTask.Delay(1000);
-                timer -= 1;
-                TimeSpan dateTime = new TimeSpan(0, 0, timer);
-                _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
-            }
-
-            _isTimerRunning = false;
-            _timerAndScorePanel.SetActive(_isTimerRunning);
-            // FinishQuestion();
+            return;
         }
+
+        int timer = _timeToEnd;
+        _isTimerRunning = true;
+        _timerAndScorePanel.SetActive(_isTimerRunning);
+
+        while (timer > 0 && _isTimerRunning)
+        {
+            await UniTask.Delay(1000);
+            timer -= 1;
+            TimeSpan dateTime = new TimeSpan(0, 0, timer);
+            _timerText.text = $"{dateTime.Minutes.ToString("00")}:{dateTime.Seconds.ToString("00")}";
+        }
+
+        _isTimerRunning = false;
+        _timerAndScorePanel.SetActive(_isTimerRunning);
+        EndOfQuestions();
+    }
+
+    void EndOfQuestions()
+    {
+        _questionGameObject?.SetActive(false);
+        _mainMenu.ShowScore(_score);
+        _questionShowed = 0;
     }
 }
