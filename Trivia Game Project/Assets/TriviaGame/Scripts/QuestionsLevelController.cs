@@ -41,22 +41,63 @@ public class QuestionsLevelController : MonoBehaviour
     {
         _questionSetups = new Dictionary<SequenceQuestion, Action>
         {
-            {SequenceQuestion.Image, SetupImage},
-            {SequenceQuestion.Text, SetupText},
-            {SequenceQuestion.TextImage, SetupTextImage},
-            {SequenceQuestion.TrueFalse, SetupTrueFalse},
+            {SequenceQuestion.Image, () => { SetupImage(_questionsOrder.ImageQuestion); }},
+            {SequenceQuestion.Text, () => { SetupText(_questionsOrder.TextQuestion); }},
+            {SequenceQuestion.TextImage, () => { SetupTextImage(_questionsOrder.TextImageQuestion); }},
+            {SequenceQuestion.TrueFalse, () => { SetupTrueFalse(_questionsOrder.TrueFalseQuestion); }},
             {SequenceQuestion.CountryPopulationLow, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
-            {SequenceQuestion.CountryPopulationMid, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
-            {SequenceQuestion.CountryPopulationHigh, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
-            {SequenceQuestion.UrbanPopulation, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
-            {SequenceQuestion.BorderQuestions, () => { SetupPopulation(_questionsOrder.PopulationLowQuestion); }},
+            {SequenceQuestion.CountryPopulationMid, () => { SetupPopulation(_questionsOrder.PopulationMidQuestion); }},
+            {SequenceQuestion.CountryPopulationHigh, () => { SetupPopulation(_questionsOrder.PopulationHighQuestion); }},
+            {SequenceQuestion.UrbanPopulation, () => { SetupPopulation(_questionsOrder.UrbanPopulationQuestion); }},
+            {SequenceQuestion.BorderQuestions, () => { SetupPopulation(_questionsOrder.BordersQuestion); }},
         };
     }
 
-    private void SetupImage()
+    private void SetupTrueFalse(QuestionData<string, bool> data)
     {
-        _imageQuestionLevel.Question = _questionsOrder.ImageQuestion.Questions;
-        var imageQuestion = _questionsOrder.ImageQuestion.GetQuestion();
+        _trueFalseQuestionLevel.Question = data.Questions;
+        var trueFalseQuestion = data.GetQuestion();
+        var hasQuestion = trueFalseQuestion.hasQuestion;
+        if (hasQuestion)
+        {
+            _trueFalseQuestionLevel.gameObject.SetActive(true);
+            _trueFalseQuestionLevel.ShowQuestion(trueFalseQuestion.question, ShowQuestion);
+            _questionGameObject = _trueFalseQuestionLevel.gameObject;
+        }
+    }
+
+    private void SetupTextImage(QuestionData<CombineTextImage, string> data)
+    {
+        _textImageQuestionLevel.Question = data.Questions;
+        var textImageQuestion = data.GetQuestion();
+        var hasQuestion = textImageQuestion.hasQuestion;
+        if (hasQuestion)
+        {
+            _textImageQuestionLevel.gameObject.SetActive(true);
+            _textImageQuestionLevel.ShowQuestion(textImageQuestion.question, ShowQuestion);
+            _questionGameObject = _textImageQuestionLevel.gameObject;
+        }
+    }
+
+    private void SetupText(QuestionData<string, string> data)
+    {
+        _textQuestionLevel.Question = data.Questions;
+        var textQuestion = data.GetQuestion();
+        var hasQuestion = textQuestion.hasQuestion;
+        if (hasQuestion)
+        {
+            _textQuestionLevel.gameObject.SetActive(true);
+            _textQuestionLevel.ShowQuestion(textQuestion.question, ShowQuestion);
+            _questionGameObject = _textQuestionLevel.gameObject;
+        }
+    }
+
+
+
+    private void SetupImage(QuestionData<Sprite, string> data)
+    {
+        _imageQuestionLevel.Question = data.Questions;
+        var imageQuestion = data.GetQuestion();
         var hasQuestion = imageQuestion.hasQuestion;
         if (hasQuestion)
         {
@@ -138,58 +179,6 @@ public class QuestionsLevelController : MonoBehaviour
         while (!hasQuestion)
         {
             _questionSetups[_questionDataShuffle[_index].Type]?.Invoke();
-            switch (_questionDataShuffle[_index].Type)//DELETE
-            {
-                case SequenceQuestion.Image:
-
-                    break;
-
-                case SequenceQuestion.Text:
-                    _textQuestionLevel.Question = _questionsOrder.TextQuestion.Questions;
-                    var textQuestion = _questionsOrder.TextQuestion.GetQuestion();
-                    hasQuestion = textQuestion.hasQuestion;
-                    if (hasQuestion)
-                    {
-                        _textQuestionLevel.gameObject.SetActive(true);
-                        _textQuestionLevel.ShowQuestion(textQuestion.question, ShowQuestion);
-                        _questionGameObject = _textQuestionLevel.gameObject;
-                    }
-
-                    break;
-
-                case SequenceQuestion.CountryPopulationLow:
-
-
-                    break;
-
-                case SequenceQuestion.TextImage:
-                    _textImageQuestionLevel.Question = _questionsOrder.TextImageQuestion.Questions;
-                    var textImageQuestion = _questionsOrder.TextImageQuestion.GetQuestion();
-                    hasQuestion = textImageQuestion.hasQuestion;
-                    if (hasQuestion)
-                    {
-                        _textImageQuestionLevel.gameObject.SetActive(true);
-                        _textImageQuestionLevel.ShowQuestion(textImageQuestion.question, ShowQuestion);
-                        _questionGameObject = _textImageQuestionLevel.gameObject;
-                    }
-
-                    break;
-
-                case SequenceQuestion.TrueFalse:
-                    _trueFalseQuestionLevel.Question = _questionsOrder.TrueFalseQuestion.Questions;
-
-                    var trueFalseQuestion = _questionsOrder.TrueFalseQuestion.GetQuestion();
-                    hasQuestion = trueFalseQuestion.hasQuestion;
-                    if (hasQuestion)
-                    {
-                        _trueFalseQuestionLevel.gameObject.SetActive(true);
-                        _trueFalseQuestionLevel.ShowQuestion(trueFalseQuestion.question, ShowQuestion);
-                        _questionGameObject = _trueFalseQuestionLevel.gameObject;
-                    }
-
-                    break;
-            } //DELETE
-
             _questionShowed++;
 
             _index++;
